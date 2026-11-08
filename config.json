@@ -45,11 +45,15 @@
   "seiten": [
     {
       "name": "GEWOBA",
-      "url": "HIER_URL_EINFUEGEN"
+      "url": "https://www.gewoba.de/immobilien/mieten/wohnungssuche"
     },
     {
       "name": "Brebau",
-      "url": "HIER_URL_EINFUEGEN"
+      "url": "https://www.brebau.de/wohnungsangebote/"
+     {
+      "name": "Schwarzes Brett",
+      "url": "https://schwarzesbrett.bremen.de/verkauf-und-angebote/mietobjekte"
+    },
     }
   ]
 }
