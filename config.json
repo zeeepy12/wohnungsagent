@@ -1,0 +1,55 @@
+{
+  "kriterien": {
+    "stadt": "Bremen",
+    "max_kaltmiete": 1100,
+    "min_zimmer": 3,
+    "min_flaeche_qm": 65,
+    "stadtteile": [
+      "Findorff",
+      "Weidedamm",
+      "Bürgerweide",
+      "Viertel",
+      "Östliche Vorstadt",
+      "Ostertor",
+      "Steintor",
+      "Fesenfeld",
+      "Peterswerder",
+      "Hulsberg",
+      "Schwachhausen",
+      "Gete",
+      "Barkhof",
+      "Riensberg",
+      "Neu-Schwachhausen",
+      "Horn-Lehe",
+      "Horn",
+      "Lehe",
+      "Lehesterdeich",
+      "Mitte",
+      "Altstadt",
+      "Bahnhofsvorstadt"
+    ],
+    "muss": [
+      "Balkon oder Terrasse"
+    ],
+    "weich": [
+      "hell (große Fenster, Süd-/West-Lage, nicht Souterrain/EG)",
+      "ruhig gelegen (Seitenstraße, Innenhof, Sackgasse; negativ: Hauptstraße, Straßenbahn, Gewerbe)"
+    ],
+    "frueheste_beziehbarkeit": "mindestens 2 Monate nach heute"
+  },
+  "mail_senders": [
+    "immobilienscout24",
+    "immowelt",
+    "kleinanzeigen"
+  ],
+  "seiten": [
+    {
+      "name": "GEWOBA",
+      "url": "HIER_URL_EINFUEGEN"
+    },
+    {
+      "name": "Brebau",
+      "url": "HIER_URL_EINFUEGEN"
+    }
+  ]
+}
