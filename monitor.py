@@ -27,6 +27,11 @@ urteil=vielleicht: kein hartes Kriterium verletzt, aber etwas ist unklar (z. B. 
 urteil=nein: ein hartes Kriterium verletzt oder weiches klar negativ. Erfinde nichts."""
 
 
+def antwort_text(r):
+    """Nur die Text-Blöcke der Antwort (Denk-Blöcke werden übersprungen)."""
+    return "".join(b.text for b in r.content if getattr(b, "type", "") == "text").strip()
+
+
 def html_to_text(html):
     soup = BeautifulSoup(html, "html.parser")
     for t in soup(["script", "style"]):
@@ -38,10 +43,10 @@ def html_to_text(html):
 
 def evaluate(text, source):
     r = client.messages.create(
-        model=MODEL, max_tokens=4000, system=SYSTEM,
+        model=MODEL, max_tokens=8000, system=SYSTEM,
         messages=[{"role": "user", "content": f"Quelle: {source}\n\n{text[:30000]}"}],
     )
-    raw = re.sub(r"^```(?:json)?|```$", "", r.content[0].text.strip(), flags=re.M).strip()
+    raw = re.sub(r"^```(?:json)?|```$", "", antwort_text(r), flags=re.M).strip()
     try:
         return json.loads(raw)
     except Exception:
@@ -70,10 +75,10 @@ def enrich(item):
         resp.raise_for_status()
         text = html_to_text(resp.text)
         r = client.messages.create(
-            model=MODEL, max_tokens=500, system=DETAIL_SYSTEM,
+            model=MODEL, max_tokens=2000, system=DETAIL_SYSTEM,
             messages=[{"role": "user", "content": text[:25000]}],
         )
-        raw = re.sub(r"^```(?:json)?|```$", "", r.content[0].text.strip(), flags=re.M).strip()
+        raw = re.sub(r"^```(?:json)?|```$", "", antwort_text(r), flags=re.M).strip()
         info = json.loads(raw)
     except Exception as e:
         print("Detailseite nicht auswertbar:", item.get("url"), e)
@@ -166,11 +171,11 @@ def schreibe_bewerbung(item):
     )
     try:
         r = client.messages.create(
-            model=MODEL, max_tokens=600, system=system,
+            model=MODEL, max_tokens=2000, system=system,
             messages=[{"role": "user", "content":
                        f"Profil:\n{profil}\n\nInserat:\n{json.dumps(item, ensure_ascii=False)}"}],
         )
-        return r.content[0].text.strip()
+        return antwort_text(r)
     except Exception as e:
         print("Bewerbungstext fehlgeschlagen:", e)
         return ""
